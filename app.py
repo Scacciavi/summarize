@@ -54,6 +54,7 @@ st.title('🔗 Pasame un pdf que te lo resumo.')
 
 # Text input
 pdf_file = st.file_uploader("Tirar pdf aca", type=["pdf"])
+st.info('Evitar subir manustcritos escaneados hace mas de mil años, la magia tiene su limite', icon="🙌")
 if pdf_file is not None:
     pdf_reader = PdfReader(pdf_file)
     n_pages = len(pdf_reader.pages)
@@ -70,9 +71,9 @@ with st.form('summarize_form', clear_on_submit=True):
     if submitted and openai_api_key.startswith('sk-'):
         with st.spinner('Leyendo...'):
             text = process_pdf(pdf_reader, pages)
-            st.title('Pdf2Text')
+            st.title('Texto a resumir')
             if len(text) > 1000:
-                st.warning('Alta paja, mucho texto... toma los primeros 10000 caracteres')
+                st.warning('Mucho texto... toma los primeros 10000 caracteres')
                 text = text[:10000]
             elif len(text) < 100:
                 st.warning('Poco texto, no se que hacer con esto...')

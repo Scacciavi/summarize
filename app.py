@@ -54,7 +54,7 @@ st.title('🔗 Pasame un pdf que te lo resumo.')
 
 # Text input
 pdf_file = st.file_uploader("Tirar pdf aca", type=["pdf"])
-st.info('Evitar subir manustcritos escaneados hace mas de mil años, la magia tiene su limite', icon="🙌")
+st.info('Evitar subir manuscritos escaneados hace mas de mil años, la magia tiene su limite', icon="🙌")
 if pdf_file is not None:
     pdf_reader = PdfReader(pdf_file)
     n_pages = len(pdf_reader.pages)
@@ -67,7 +67,7 @@ if pdf_file is not None:
 # Form to accept user's text input for summarization
 result = []
 with st.form('summarize_form', clear_on_submit=True):
-    submitted = st.form_submit_button('Submit', disabled=(not pdf_file))
+    submitted = st.form_submit_button('Resumir!', disabled=(not pdf_file))
     if submitted and openai_api_key.startswith('sk-'):
         with st.spinner('Leyendo...'):
             text = process_pdf(pdf_reader, pages)

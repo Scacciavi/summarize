@@ -4,11 +4,11 @@ from langchain.docstore.document import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains.summarize import load_summarize_chain
 from langchain.prompts import PromptTemplate
+import os
 
 from PyPDF2 import PdfReader
-prefix = 'sk-'
-suffix = 'Kjegb1bBboF7xBAFiFSLT3BlbkFJAR8zYrS6tYeKvTaKlrjB'
-openai_api_key = prefix + suffix
+
+openai_api_key = os.getenv('OPENAI_KEY')
 
 def generate_response(txt):
     # Instantiate the LLM model

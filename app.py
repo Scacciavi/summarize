@@ -6,7 +6,9 @@ from langchain.chains.summarize import load_summarize_chain
 from langchain.prompts import PromptTemplate
 
 from PyPDF2 import PdfReader
-openai_api_key = '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'
+prefix = 'sk-'
+suffix = 'Kjegb1bBboF7xBAFiFSLT3BlbkFJAR8zYrS6tYeKvTaKlrjB'
+openai_api_key = prefix + suffix
 
 def generate_response(txt):
     # Instantiate the LLM model

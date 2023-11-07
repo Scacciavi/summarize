@@ -1,5 +1,0 @@
-streamlit
-langchain
-openai==0.28.1
-tiktoken
-PyPDF2

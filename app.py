@@ -1,18 +1,18 @@
-import streamlit as st
-from langchain.llms.openai import OpenAI
-from langchain.docstore.document import Document
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.chains.summarize import load_summarize_chain
-from langchain.prompts import PromptTemplate
 import os
 
+import streamlit as st
+from langchain.chains.summarize import load_summarize_chain
+from langchain.docstore.document import Document
+from langchain.llms.openai import OpenAI
+from langchain.prompts import PromptTemplate
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from PyPDF2 import PdfReader
 
 openai_api_key = os.getenv('OPENAI_KEY')
 
 def generate_response(txt):
     # Instantiate the LLM model
-    
+
     llm = OpenAI(temperature=0, openai_api_key=openai_api_key)
     text_splitter = RecursiveCharacterTextSplitter(separators=["\n\n", "\n"], chunk_size=700, chunk_overlap=100)
     texts = text_splitter.split_text(txt)
@@ -22,14 +22,14 @@ def generate_response(txt):
     # chain = load_summarize_chain(llm, chain_type='map_reduce')
     # return chain.run(docs)
     map_prompt = """
-    Escribe un resumen concizo de este texto:
+    Escribe un resumen conciso de este texto:
     "{text}"
-    Resumen concizo:
+    Resumen conciso:
     """
     map_prompt_template = PromptTemplate(template=map_prompt, input_variables=["text"])
     combine_prompt = """
-    Escribe un resumen concizo de este texto separado por tripple commilas.
-    Retorna tu respouesta en bullet points que cubran los puntos claves del texto.
+    Escribe un resumen conciso de este texto separado por triple commilas.
+    Retorna tu respuesta en bullet points que cubran los puntos claves del texto.
     ```{text}```
     BULLET POINT RESUMEN:
     """
@@ -49,7 +49,7 @@ def process_pdf(pdf_reader, pages):
     return text
 
 # Page title
-st.set_page_config(page_title='Que paja leer..')
+st.set_page_config(page_title='Que vagancia leer..')
 st.title('🔗 Pasame un pdf que te lo resumo.')
 
 # Text input
@@ -80,7 +80,7 @@ with st.form('summarize_form', clear_on_submit=True):
             elif len(text) <= n_pages:
                 st.warning('Totalmente ilegible, no se que hacer con esto...')
             st.markdown(text)
-        with st.spinner('Resuminedo...'):
+        with st.spinner('Resumiendo...'):
             response = generate_response(text)
             result.append(response)
             del openai_api_key
